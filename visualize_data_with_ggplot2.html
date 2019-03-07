@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visualize Data with ggplot2 Package</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Damien Dupre" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs\xaringan_custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Visualize Data with ggplot2 Package
+### Damien Dupre
+### 8/03/2019
+
+---
+
+
+
+
+# ggplot2, a major part of the Tidyverse
+
+ggplot2 is the second version of the package ggplot (which no longer exist)
+
+It stands for "Grammar of Graphics"
+
+It is the most used package to plot data
+
+
+```r
+install.packages("ggplot2")
+```
+
+
+```r
+library(ggplot2)
+```
+
+---
+
+# First steps
+
+We need some data!
+
+
+```r
+data_managers &lt;- read.csv("https://raw.githubusercontent.com/damien-dupre/data/master/manager_satisfaction_performance_raw.csv")
+```
+
+but these data need some wrangling
+
+
+```r
+library(dplyr)
+
+data_managers &lt;- data_managers %&gt;% 
+  rename(
+    MCN = monthly.contract.negociated,
+    JS_Q1 = job.satisfaction.Q1,
+    JS_Q2 = job.satisfaction.Q2,
+    JS_Q3 = job.satisfaction.Q3,
+    JS_Q4_Rev = job.satisfaction.Q4.reverse,
+    JS_Q5 = job.satisfaction.Q5
+  ) %&gt;% 
+  mutate(JS_Q4 = (10-0) - JS_Q4_Rev) %&gt;% 
+  mutate(JS_score = cbind(JS_Q1,JS_Q2,JS_Q3,JS_Q4,JS_Q5) %&gt;% rowMeans())
+```
+
+---
+
+# Using ggplot2
+
+_1. we need to initiate the plot
+
+
+```r
+ggplot(data = data_managers)
+```
+
+_2. We need to add some layers
+
+Layers can be:
+* points, lines, columns, boxplots, ...
+* axis characteristics
+* plot specifications
+
+---
+
+# Data layers (points, lines, columns, boxplots, ...)
+
+All functions are starting with `geom_` in ggplot2
+
+* points: `geom_point()`
+* lines: `geom_line()`
+* columns: `geom_col()`
+* boxplots: `geom_boxplot()`
+
+Arguments
+* mapping = aes(x = Xcol, y = Ycol, color = Zcol, fill = Zcol, size = Zcol)
+* size
+* color
+* ...
+
+---
+
+# Examples with x = managers and y = MCN
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = managers, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_line(mapping = aes(x = managers, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_col(mapping = aes(x = managers, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_boxplot(mapping = aes(x = managers, y = MCN))
+```
+
+---
+
+# Examples with x = JS_score and y = MCN
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_line(mapping = aes(x = JS_score, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_col(mapping = aes(x = JS_score, y = MCN))
+
+ggplot(data = data_managers) +
+  geom_boxplot(mapping = aes(x = JS_score, y = MCN))
+```
+
+---
+
+# geom_smooth(), a special summary layer
+
+Arguments
+* method = "lm", "glm", "loess" or "gam"
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN), method = "lm")
+```
+
+Much better!
+
+---
+
+# let's add some colors
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN, color = managers)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN, color = managers), 
+              method = "lm", 
+              fullrange = TRUE)
+```
+
+---
+
+# Axis characteristics layers
+
+* scale_x_continuous() / scale_x_discrete()
+* scale_y_continuous() / scale_y_discrete()
+* scale_color_continuous() / scale_color_discrete() / scale_color_manual()
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN, color = managers)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN, color = managers), 
+              method = "lm", 
+              fullrange = TRUE) +
+  scale_x_continuous(name = "Job Satisfaction Score") +
+  scale_y_continuous(name = "Monthly Contract Negociated (avg.)", limits = c(0,NA)) +
+  scale_color_manual(name = "Manager Experience", values = c("red","blue"))
+```
+
+---
+
+# Plot specifications layers
+
+Facetting with facet_wrap() and facet_grid()
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN, color = managers)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN, color = managers), 
+              method = "lm", 
+              fullrange = TRUE) +
+  scale_x_continuous(name = "Job Satisfaction Score") +
+  scale_y_continuous(name = "Monthly Contract Negociated (avg.)") +
+  scale_color_manual(name = "Manager Experience", values = c("red","blue")) +
+  facet_wrap(~ managers)
+```
+
+---
+
+# Plot specifications layers
+
+Themes with theme_bw(), theme_minimal(), ...
+
+see all the basic themes here: https://www.r-graph-gallery.com/192-ggplot-themes/
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN, color = managers)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN, color = managers), 
+              method = "lm", 
+              fullrange = TRUE) +
+  scale_x_continuous(name = "Job Satisfaction Score") +
+  scale_y_continuous(name = "Monthly Contract Negociated (avg.)") +
+  scale_color_manual(name = "Manager Experience", values = c("red","blue")) +
+  theme_minimal()
+```
+
+---
+
+# More specifications
+
+
+```r
+ggplot(data = data_managers) +
+  geom_point(mapping = aes(x = JS_score, y = MCN, color = managers)) +
+  geom_smooth(mapping = aes(x = JS_score, y = MCN, color = managers), 
+              method = "lm", 
+              fullrange = TRUE) +
+  scale_x_continuous(name = "Job Satisfaction Score") +
+  scale_y_continuous(name = "Monthly Contract Negociated (avg.)") +
+  scale_color_manual(name = "Manager Experience", values = c("red","blue")) +
+  theme_minimal() +
+  theme(
+    text = element_text(size=14, family="serif"),
+    axis.line.x = element_line(color="black", size = 0.1),
+    axis.line.y = element_line(color="black", size = 0.1),
+    axis.title.y = element_text(margin = margin(t = 0, r = 20, b = 0, l = 0)),
+    legend.text = element_text(size=8),
+    legend.position = "bottom")
+```
+
+---
+
+# Which gives...
+
+![](visualize_data_with_ggplot2_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+# More possibilities with ggplot
+
+Have a look at the ggplot Cheat Sheet
+
+
+https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+or google "ggplot cheat sheet"
+
+![](https://www.rstudio.com/wp-content/uploads/2018/08/data-visualization-2.1.png)
+
+---
+class: center, middle
+
+# Your are now a master of ggplot!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

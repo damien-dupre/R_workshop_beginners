@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Wrangling With dplyr Package</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Damien Dupre" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs\xaringan_custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Data Wrangling With dplyr Package
+### Damien Dupre
+### 8/03/2019
+
+---
+
+
+
+
+# The Tidyverse
+
+A collection of modern R packages that share common philosophies, embed best practices, and are designed to work together.
+
+An R package that serves as a short cut for installing and loading the components of the tidyverse.
+
+
+```r
+install.packages("tidyverse")
+# can take time to download and install beause many package are included
+
+library(tidyverse)
+```
+
+---
+
+# The so called Tidy Data
+
+
+.pull-left[
+
+![](./img/tidy_data.png)
+
+]
+
+.pull-right[
+
+A data set is **tidy** if:
+1. Each **variable** is in its own **column**
+2. Each **case** is in its own **row**
+3. Each **value** is in its own **cell**
+
+]
+
+---
+class: center, middle
+
+# Data Wrangling with `dplyr` Package
+
+---
+
+# Get the data
+
+Can be found here:
+"https://raw.githubusercontent.com/damien-dupre/data/master/manager_satisfaction_performance_raw.csv"
+
+
+```r
+data &lt;- read.csv("https://raw.githubusercontent.com/damien-dupre/data/master/manager_satisfaction_performance_raw.csv")
+```
+
+7 columns:
+* managers = character "senior" or "junior",
+* monthly.contract.negociated = numeric (average amount of contracts per month)
+* job.satisfaction.Q1 = from 0 to 10
+* job.satisfaction.Q2 = from 0 to 10
+* job.satisfaction.Q3 = from 0 to 10
+* job.satisfaction.Q4.reverse = from 0 to 10
+* job.satisfaction.Q5 = from 0 to 10
+
+---
+
+# How to use `dplyr`?
+
+
+```r
+install.packages("dplyr")
+library(dplyr)
+```
+
+dplyr has few very useful functions:
+
+* `rename()` to rename a column
+* `select()` to select certain columns of a dataframe
+* `filter()` to filter certain rows of a dataframe
+* `mutate()` to create new columns
+* `group_by()` to analyse groups of data
+* `summarise()` to create summary of data (mean, sd, ...)
+
+---
+
+# rename()
+
+Arguments
+1. Name of the dataframe object
+2. NewColName = OldColName
+
+Example
+
+
+```r
+# Basic
+data_with_new_names &lt;- rename(data, MCN = monthly.contract.negociated)
+
+# Works as well
+data_with_new_names &lt;- rename(
+  data,
+  MCN = monthly.contract.negociated
+  )
+
+# Works with many columns at once
+data_with_new_names &lt;- rename(
+  data,
+  MCN = monthly.contract.negociated,
+  JS_Q1 = job.satisfaction.Q1,
+  JS_Q2 = job.satisfaction.Q2,
+  JS_Q3 = job.satisfaction.Q3,
+  JS_Q4_Rev = job.satisfaction.Q4.reverse,
+  JS_Q5 = job.satisfaction.Q5
+  )
+```
+
+---
+
+# select()
+
+Arguments
+1. Name of the dataframe object
+2. ColName1, ColName2, ...
+
+Example
+
+
+```r
+# Basic
+data_with_few_col &lt;- select(data_with_new_names, JS_Q1, JS_Q2, JS_Q3, JS_Q4_Rev, JS_Q5)
+
+# Works as well
+data_with_few_col &lt;- select(
+  data_with_new_names, 
+  JS_Q1, 
+  JS_Q2, 
+  JS_Q3, 
+  JS_Q4_Rev, 
+  JS_Q5)
+```
+
+---
+
+# filter()
+
+Arguments
+1. Name of the dataframe object
+2. ColName to filter
+
+filter can be character or numeric
+
+
+```r
+# Filter characters
+data_filtered &lt;- filter(data_with_new_names, managers == "senior")
+data_filtered &lt;- filter(data_with_new_names, managers != "senior")
+
+# Filter numerics
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 == 5)  # values equal 5
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 != 5)  # values different than 5
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 &lt;  5)  # values lower than 5
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 &lt;= 5)  # values lower or egal 5
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 &gt;  5)  # values higher than 5
+data_filtered &lt;- filter(data_with_new_names, JS_Q1 &gt;= 5)  # values higher or egal 5
+```
+
+---
+
+# mutate()
+
+Arguments
+1. Name of the dataframe object
+2. NewColName = Condition for new values
+
+
+```r
+# Recode column managers
+data_new_col &lt;- mutate(
+  data_with_new_names,
+  managers_C = ifelse(managers == "senior", 1,0)
+  )
+
+# Recode reverse question
+data_new_col &lt;- mutate(
+  data_with_new_names, 
+  JS_Q4 = (10-0) - JS_Q4_Rev
+  )
+
+# Create composite score for job satisfaction
+data_new_col &lt;- mutate(
+  data_new_col, 
+  JS_score = rowMeans(cbind(JS_Q1,JS_Q2,JS_Q3,JS_Q4,JS_Q5))
+  )
+```
+
+---
+
+# summarise()
+
+`summarise()` creates a summary of the data
+
+
+```r
+# Average of Job Satisfaction Score
+data_summary &lt;- summarise(data_new_col, mean_JS = mean(JS_score))
+
+# SD of Job Satisfaction Score
+data_summary &lt;- summarise(data_new_col, sd_JS = sd(JS_score))
+
+# Average and SD of Job Satisfaction Score
+data_summary &lt;- summarise(data_new_col,
+                          mean_JS = mean(JS_score), 
+                          sd_JS = sd(JS_score))
+
+# Works as well
+data_summary &lt;- summarise(
+  data_new_col,
+  mean_JS = mean(JS_score),
+  sd_JS = sd(JS_score)
+  )
+```
+
+---
+
+# summarise() and group_by()
+
+`group_by()` with `summarise()` create a summary of the data by groups
+
+
+```r
+# Group data in a new object
+data_grouped &lt;- group_by(data_new_col, managers)
+
+# Then summarise by group
+data_summary &lt;- summarise(
+  data_grouped, 
+  mean_JS = mean(JS_score), 
+  sd_JS = sd(JS_score))
+```
+
+---
+
+# Using pipes %&gt;%
+
+The symbole `%&gt;%` can be translated by "then"
+
+It takes an object and automatically associates it to the following code
+
+
+```r
+# Instead of 
+data_with_new_names &lt;- rename(
+  data,
+  MCN = monthly.contract.negociated,
+  JS_Q1 = job.satisfaction.Q1,
+  JS_Q2 = job.satisfaction.Q2,
+  JS_Q3 = job.satisfaction.Q3,
+  JS_Q4_Rev = job.satisfaction.Q4.reverse,
+  JS_Q5 = job.satisfaction.Q5
+  )
+
+# Use
+data_with_new_names &lt;- data %&gt;% 
+  rename(
+    MCN = monthly.contract.negociated,
+    JS_Q1 = job.satisfaction.Q1,
+    JS_Q2 = job.satisfaction.Q2,
+    JS_Q3 = job.satisfaction.Q3,
+    JS_Q4_Rev = job.satisfaction.Q4.reverse,
+    JS_Q5 = job.satisfaction.Q5
+  )
+```
+
+---
+
+# Using pipes %&gt;%
+
+The symbole `%&gt;%` can be translated by "then"
+
+It takes an object and automatically associates it to the following code
+
+
+```r
+# Instead of 
+data_with_few_col &lt;- select(data_with_new_names, JS_Q1, JS_Q2, JS_Q3, JS_Q4_Rev, JS_Q5)
+
+# Use
+data_with_few_col &lt;- data_with_new_names %&gt;% 
+  select(JS_Q1, JS_Q2, JS_Q3, JS_Q4_Rev, JS_Q5)
+```
+
+---
+
+# Using pipes to chain operations
+
+
+```r
+data_new &lt;- data %&gt;% 
+  rename(
+    MCN = monthly.contract.negociated,
+    JS_Q1 = job.satisfaction.Q1,
+    JS_Q2 = job.satisfaction.Q2,
+    JS_Q3 = job.satisfaction.Q3,
+    JS_Q4_Rev = job.satisfaction.Q4.reverse,
+    JS_Q5 = job.satisfaction.Q5
+  ) %&gt;% 
+  mutate(JS_Q4 = (10-0) - JS_Q4_Rev) %&gt;% 
+  mutate(JS_score = rowMeans(cbind(JS_Q1,JS_Q2,JS_Q3,JS_Q4,JS_Q5))) %&gt;% 
+  group_by(managers) %&gt;% 
+  summarise(mean_JS = mean(JS_score), sd_JS = sd(JS_score))
+```
+
+can be translated as:
+* Create a new object "data_new" from "data", then 
+* Rename the columns, then
+* Create a new column called "JS_Q4" which is equal to ((10-0) - column "JS_Q4_Rev"), then
+* Create a new column called "JS_score" which the mean of Questions 1 to 5, then
+* Group by type of managers, then
+* Calculate the mean and sd of their Job Satisfaction Score
+
+---
+
+# More possibilities with dplyr
+
+Have a look at the Data Wrangling Cheat Sheet
+
+
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+
+or google "dplyr cheat sheet"
+
+![](./img/dplyr_cheat_sheet.png)
+
+---
+class: center, middle
+
+# Your are now a master of dplyr!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
