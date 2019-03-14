@@ -327,6 +327,7 @@ str(ObjectName)
 
 WARNING: path in R are using UNIX system so Apple and Linux users are fine but Windows users have to replace `\` by `/` in any path.
 
+Avoid manual conversion in windows by using the little tool called "Path Copy Copy" https://pathcopycopy.github.io/
 ---
 
 # Using Packages
