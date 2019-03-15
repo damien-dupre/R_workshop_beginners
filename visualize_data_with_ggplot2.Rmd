@@ -68,6 +68,12 @@ data_managers <- data_managers %>%
 
 ---
 
+# Layers of ggplot2
+
+![](https://cdn-images-1.medium.com/max/1600/1*4rPyILOvL7XvS_0B8lmBLA.png)
+
+---
+
 # Using ggplot2
 
 _1. we need to initiate the plot
