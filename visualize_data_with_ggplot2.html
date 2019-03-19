@@ -3,7 +3,7 @@
   <head>
     <title>Visualize Data with ggplot2 Package</title>
     <meta charset="utf-8">
-    <meta name="author" content="Damien Dupre" />
+    <meta name="author" content="Damien Dupré" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="libs\xaringan_custom.css" type="text/css" />
   </head>
@@ -12,8 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Visualize Data with ggplot2 Package
-### Damien Dupre
-### 8/03/2019
+### Damien Dupré
 
 ---
 
@@ -46,7 +45,7 @@ We need some data!
 
 
 ```r
-data_managers &lt;- read.csv("https://raw.githubusercontent.com/damien-dupre/data/master/manager_satisfaction_performance_raw.csv")
+data_managers &lt;- read.csv("https://bit.ly/2HvAuAO")
 ```
 
 but these data need some wrangling
@@ -78,16 +77,15 @@ data_managers &lt;- data_managers %&gt;%
 
 # Using ggplot2
 
-_1. we need to initiate the plot
+First, we need to initiate the plot
 
 
 ```r
 ggplot(data = data_managers)
 ```
 
-_2. We need to add some layers
+Then, we need to add some layers
 
-Layers can be:
 * points, lines, columns, boxplots, ...
 * axis characteristics
 * plot specifications

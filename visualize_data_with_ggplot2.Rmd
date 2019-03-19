@@ -1,8 +1,7 @@
 ---
 title: "Visualize Data with ggplot2 Package"
 subtitle: ""
-author: "Damien Dupre"
-date: "8/03/2019"
+author: "Damien Dupré"
 output:
   xaringan::moon_reader:
     css: ["default", "./libs/xaringan_custom.css"]
@@ -45,7 +44,7 @@ library(ggplot2)
 We need some data!
 
 ```{r eval=TRUE}
-data_managers <- read.csv("https://raw.githubusercontent.com/damien-dupre/data/master/manager_satisfaction_performance_raw.csv")
+data_managers <- read.csv("https://bit.ly/2HvAuAO")
 ```
 
 but these data need some wrangling
@@ -76,15 +75,14 @@ data_managers <- data_managers %>%
 
 # Using ggplot2
 
-_1. we need to initiate the plot
+First, we need to initiate the plot
 
 ```{r}
 ggplot(data = data_managers)
 ```
 
-_2. We need to add some layers
+Then, we need to add some layers
 
-Layers can be:
 * points, lines, columns, boxplots, ...
 * axis characteristics
 * plot specifications
