@@ -9,15 +9,24 @@
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
 
-# Data Wrangling With dplyr Package
-### Damien Dupré
+
+
+
+background-image: url(http://hea.ie/assets/uploads/2017/04/DCU-1000x500.jpg)
+background-size: 95%
+
+&lt;div class="tulsa-logo"&gt;&lt;/div&gt; 
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
+
+# Data Wrangling With dplyr
 
 ---
-
-
-
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # R basic reminder
 
@@ -54,6 +63,9 @@ Read data with `read.csv("path/to/file.csv")`
 Write data with `write.csv(DataframeObjectName, "path/to/file.csv", row.names = FALSE)`
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # The Tidyverse
 
@@ -70,6 +82,9 @@ library(tidyverse)
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # The so called Tidy Data
 
@@ -91,10 +106,16 @@ A data set is **tidy** if:
 
 ---
 class: center, middle
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Data Wrangling with `dplyr` Package
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Get the data
 
@@ -119,6 +140,9 @@ data &lt;- read.csv("https://bit.ly/2HvAuAO")
 * job.satisfaction.Q5 = from 0 to 10
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # How to use `dplyr`?
 
@@ -138,6 +162,9 @@ dplyr has few very useful functions:
 * `summarise()` to create summary of data (mean, sd, ...)
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # rename()
 
@@ -171,6 +198,9 @@ data_with_new_names &lt;- rename(
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # select()
 
@@ -196,6 +226,9 @@ data_with_few_col &lt;- select(
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # filter()
 
@@ -221,6 +254,9 @@ data_filtered &lt;- filter(data_with_new_names, JS_Q1 &gt;= 5)  # values higher 
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # mutate()
 
@@ -250,6 +286,9 @@ data_new_col &lt;- mutate(
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # summarise()
 
@@ -277,6 +316,9 @@ data_summary &lt;- summarise(
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # summarise() and group_by()
 
@@ -295,6 +337,9 @@ data_summary &lt;- summarise(
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Using pipes %&gt;%
 
@@ -328,6 +373,9 @@ data_with_new_names &lt;- data %&gt;%
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Using pipes %&gt;%
 
@@ -346,6 +394,9 @@ data_with_few_col &lt;- data_with_new_names %&gt;%
 ```
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Using pipes to chain operations
 
@@ -375,6 +426,9 @@ can be translated as:
 * Calculate the mean and sd of their Job Satisfaction Score
 
 ---
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # More possibilities with dplyr
 
@@ -389,6 +443,9 @@ or google "dplyr cheat sheet"
 
 ---
 class: center, middle
+&lt;div class="aacsb-logo"&gt;&lt;/div&gt; 
+&lt;div class="dcu-logo"&gt;&lt;/div&gt; 
+&lt;div class="dotlab-logo"&gt;&lt;/div&gt; 
 
 # Your are now a master of dplyr!
     </textarea>

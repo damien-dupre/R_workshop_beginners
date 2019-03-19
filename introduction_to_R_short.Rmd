@@ -10,6 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+    seal: false
 ---
 
 ```{r setup, include=FALSE}
@@ -17,6 +18,20 @@ options(htmltools.dir.version = FALSE, scipen = 999)
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+background-image: url(http://hea.ie/assets/uploads/2017/04/DCU-1000x500.jpg)
+background-size: 95%
+
+<div class="tulsa-logo"></div> 
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
+
+# Introduction to R - the basics
+
+---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 # Become a UseR
 
 --
@@ -36,6 +51,9 @@ knitr::opts_chunk$set(eval = FALSE)
 * This is easier when things are script based
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How to install R
 
@@ -60,6 +78,9 @@ knitr::opts_chunk$set(eval = FALSE)
 ]
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # RStudio IDE
 
@@ -71,6 +92,9 @@ Made of 4 panels:
 
 <p style="text-align:center;"><img src="http://www.sthda.com/sthda/RDoc/images/rstudio.png" width="400">
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # From Science to Data Science in 4 clicks
 
@@ -80,13 +104,18 @@ Made of 4 panels:
   * Scroll down to **Vibrant Ink** and click **Apply** > **OK**
   
 ---
-
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 <p style="text-align:center;">**Welcome to ...**
 
 --
 background-image: url(https://media2.giphy.com/media/10zxDv7Hv5RF9C/giphy.gif?cid=3640f6095c7801104a4c3632591e5e42)
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # What is R?
 
@@ -123,6 +152,9 @@ plots <- ggplot(data = dataframes, aes(x = col1, y = col2)) +
   * `Alt + dash` : insert arrow (<-)
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How does R work?
 
@@ -158,10 +190,16 @@ summary(lm(y~x, test))
 * The prompt `Browse[]>` with a red "stop" button indicates that your code has produced an error and you need to click on it to exit the debbug mode
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 ![](https://support.rstudio.com/hc/en-us/article_attachments/201608498/shiny-debugging.png)
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Object Classes
 
@@ -175,6 +213,9 @@ summary(lm(y~x, test))
   * TRUE and FALSE
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Basic Operators
 
@@ -197,6 +238,9 @@ summary(lm(y~x, test))
 |!=       |not equal to            |
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Basic Examples Using Assigment
 
@@ -220,6 +264,9 @@ character_two + numeric_three
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using Functions
 
@@ -258,6 +305,9 @@ NewObject <- PackageName::FunctionName(x, y)
 Note: Arguments' order is important
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using Packages
 
@@ -277,10 +327,16 @@ library(dplyr) # at the begining of each script to be loaded every new session
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Most Useful Objects
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Basic Objects
 
@@ -297,6 +353,9 @@ class: center, middle
 * List
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Vectors
 
@@ -322,6 +381,9 @@ heterogenous_vector
 Note: Missing Values are `NA`
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Factors
 
@@ -343,6 +405,9 @@ levels(gender)
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Arrays
 
@@ -364,6 +429,9 @@ matrix(m, nrow=3, ncol=4, byrow=T)
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div>
 
 # Data Frames
 
@@ -399,6 +467,9 @@ dataframes$col2
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Lists
 
@@ -417,10 +488,16 @@ lists <- list(
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Read and Save Data
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How to use external data
 
@@ -441,6 +518,9 @@ Note: always try to save to .csv which is the most common data file format. Avoi
 Warning: path in R are using UNIX system so Apple and Linux users are fine but Windows users have to replace `\` by `/` in any path.
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How to save data 
 
@@ -459,10 +539,14 @@ write.csv(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How to solve your pRoblems
 
 1. Look at your error
+
   * If it's obvious, solve it by yourself
   * If it's not obvious, copy paste the error in google
   
@@ -482,5 +566,8 @@ write.csv(
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Your are now a UseR!

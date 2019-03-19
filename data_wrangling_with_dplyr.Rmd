@@ -10,12 +10,28 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+    seal: false
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE, scipen = 999)
 knitr::opts_chunk$set(eval = FALSE)
 ```
+
+background-image: url(http://hea.ie/assets/uploads/2017/04/DCU-1000x500.jpg)
+background-size: 95%
+
+<div class="tulsa-logo"></div> 
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
+
+# Data Wrangling With dplyr
+
+---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # R basic reminder
 
@@ -52,6 +68,9 @@ Read data with `read.csv("path/to/file.csv")`
 Write data with `write.csv(DataframeObjectName, "path/to/file.csv", row.names = FALSE)`
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # The Tidyverse
 
@@ -67,6 +86,9 @@ library(tidyverse)
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # The so called Tidy Data
 
@@ -88,10 +110,16 @@ A data set is **tidy** if:
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Data Wrangling with `dplyr` Package
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Get the data
 
@@ -115,6 +143,9 @@ data <- read.csv("https://bit.ly/2HvAuAO")
 * job.satisfaction.Q5 = from 0 to 10
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # How to use `dplyr`?
 
@@ -133,6 +164,9 @@ dplyr has few very useful functions:
 * `summarise()` to create summary of data (mean, sd, ...)
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # rename()
 
@@ -165,6 +199,9 @@ data_with_new_names <- rename(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # select()
 
@@ -189,6 +226,9 @@ data_with_few_col <- select(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # filter()
 
@@ -213,6 +253,9 @@ data_filtered <- filter(data_with_new_names, JS_Q1 >= 5)  # values higher or ega
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # mutate()
 
@@ -241,6 +284,9 @@ data_new_col <- mutate(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # summarise()
 
@@ -267,6 +313,9 @@ data_summary <- summarise(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # summarise() and group_by()
 
@@ -284,6 +333,9 @@ data_summary <- summarise(
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using pipes %>%
 
@@ -316,6 +368,9 @@ data_with_new_names <- data %>%
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using pipes %>%
 
@@ -333,6 +388,9 @@ data_with_few_col <- data_with_new_names %>%
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using pipes to chain operations
 
@@ -361,6 +419,9 @@ can be translated as:
 * Calculate the mean and sd of their Job Satisfaction Score
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # More possibilities with dplyr
 
@@ -375,6 +436,9 @@ or google "dplyr cheat sheet"
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Your are now a master of dplyr!
 

@@ -10,6 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+    seal: false
 ---
 
 ```{r setup, include=FALSE}
@@ -20,6 +21,21 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   error = FALSE)
 ```
+
+background-image: url(http://hea.ie/assets/uploads/2017/04/DCU-1000x500.jpg)
+background-size: 95%
+
+<div class="tulsa-logo"></div> 
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
+
+# Visualize Data with ggplot2
+
+---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # ggplot2, a major part of the Tidyverse
 
@@ -38,6 +54,9 @@ library(ggplot2)
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # First steps
 
@@ -66,12 +85,18 @@ data_managers <- data_managers %>%
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Layers of ggplot2
 
 ![](https://cdn-images-1.medium.com/max/1600/1*4rPyILOvL7XvS_0B8lmBLA.png)
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Using ggplot2
 
@@ -88,6 +113,9 @@ Then, we need to add some layers
 * plot specifications
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Data layers (points, lines, columns, boxplots, ...)
 
@@ -105,6 +133,9 @@ Arguments
 * ...
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Examples with x = managers and y = MCN
 
@@ -123,6 +154,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Examples with x = JS_score and y = MCN
 
@@ -141,6 +175,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # geom_smooth(), a special summary layer
 
@@ -156,6 +193,9 @@ ggplot(data = data_managers) +
 Much better!
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # let's add some colors
 
@@ -168,6 +208,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Axis characteristics layers
 
@@ -187,6 +230,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Plot specifications layers
 
@@ -205,6 +251,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Plot specifications layers
 
@@ -225,6 +274,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # More specifications
 
@@ -248,6 +300,9 @@ ggplot(data = data_managers) +
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Which gives...
 
@@ -267,10 +322,13 @@ ggplot(data = data_managers) +
     axis.line.y = element_line(color="black", size = 0.1),
     axis.title.y = element_text(margin = margin(t = 0, r = 20, b = 0, l = 0)),
     legend.text = element_text(size=8),
-    legend.position = "bottom")
+    legend.position = "right")
 ```
 
 ---
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # More possibilities with ggplot
 
@@ -285,5 +343,8 @@ or google "ggplot cheat sheet"
 
 ---
 class: center, middle
+<div class="aacsb-logo"></div> 
+<div class="dcu-logo"></div> 
+<div class="dotlab-logo"></div> 
 
 # Your are now a master of ggplot!
