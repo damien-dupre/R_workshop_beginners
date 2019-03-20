@@ -149,7 +149,7 @@ plots <- ggplot(data = dataframes, aes(x = col1, y = col2)) +
 
 * Short cuts
   * `Ctl + Enter` : process line
-  * `Alt + dash` : insert arrow (<-)
+  * `Alt + -` : insert arrow (<-)
 
 ---
 <div class="aacsb-logo"></div> 
