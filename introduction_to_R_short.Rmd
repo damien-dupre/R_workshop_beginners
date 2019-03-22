@@ -277,7 +277,7 @@ character_two + numeric_three
 * Functions are stored in a package 
 
 ```{r}
-install.package("PackageName") # Once
+install.packages("PackageName") # Once
 
 library(PackageName) # Every time you start R
 
